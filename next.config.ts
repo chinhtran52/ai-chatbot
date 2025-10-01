@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
       {
         hostname: "avatar.vercel.sh",
       },
+      {
+        protocol: "https",
+        hostname: process.env.IMAGE_HOST as string,
+        pathname: "/**",
+      },
     ],
   },
 };

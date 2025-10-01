@@ -38,11 +38,11 @@ export default function Page() {
       });
     } else if (state.status === "success") {
       setIsSuccessful(true);
-      updateSession();
       router.refresh();
+      updateSession();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.status, router.refresh, updateSession]);
+  }, [state.status]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get("email") as string);
@@ -60,7 +60,7 @@ export default function Page() {
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful}>Sign in</SubmitButton>
-          <p className="mt-4 text-center text-gray-600 text-sm dark:text-zinc-400">
+          {/* <p className="mt-4 text-center text-gray-600 text-sm dark:text-zinc-400">
             {"Don't have an account? "}
             <Link
               className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
@@ -69,7 +69,7 @@ export default function Page() {
               Sign up
             </Link>
             {" for free."}
-          </p>
+          </p> */}
         </AuthForm>
       </div>
     </div>

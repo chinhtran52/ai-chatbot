@@ -55,6 +55,9 @@ export const register = async (
   _: RegisterActionState,
   formData: FormData
 ): Promise<RegisterActionState> => {
+  if (formData.get("secret") !== process.env.REGISTER_SECRET) {
+    return { status: "invalid_data" };
+  }
   try {
     const validatedData = authFormSchema.parse({
       email: formData.get("email"),

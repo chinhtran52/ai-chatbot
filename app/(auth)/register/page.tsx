@@ -8,6 +8,8 @@ import { AuthForm } from "@/components/auth-form";
 import { SubmitButton } from "@/components/submit-button";
 import { toast } from "@/components/toast";
 import { type RegisterActionState, register } from "../actions";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function Page() {
   const router = useRouter();
@@ -38,11 +40,11 @@ export default function Page() {
       toast({ type: "success", description: "Account created successfully!" });
 
       setIsSuccessful(true);
-      updateSession();
       router.refresh();
+      updateSession();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.status, router.refresh, updateSession]);
+  }, [state.status]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get("email") as string);
@@ -59,6 +61,22 @@ export default function Page() {
           </p>
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>
+          <div className="flex flex-col gap-2">
+            <Label
+              className="font-normal text-zinc-600 dark:text-zinc-400"
+              htmlFor="secret"
+            >
+              Secret
+            </Label>
+
+            <Input
+              className="bg-muted text-md md:text-sm"
+              id="secret"
+              name="secret"
+              required
+              type="password"
+            />
+          </div>
           <SubmitButton isSuccessful={isSuccessful}>Sign Up</SubmitButton>
           <p className="mt-4 text-center text-gray-600 text-sm dark:text-zinc-400">
             {"Already have an account? "}
